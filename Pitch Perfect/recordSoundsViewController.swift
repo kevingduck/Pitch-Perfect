@@ -64,6 +64,9 @@ class recordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         var session = AVAudioSession.sharedInstance()
         session.setCategory(AVAudioSessionCategoryPlayAndRecord, error: nil)
         
+        //Force output to speaker`
+        session.setCategory(AVAudioSessionCategoryPlayAndRecord, withOptions: AVAudioSessionCategoryOptions.DefaultToSpeaker, error: nil)
+        
         //Set audioRecorder to an instance of AVAudioRecorder with the file at the filePath URL
         audioRecorder = AVAudioRecorder(URL: filePath, settings: nil, error: nil)
         //Set us as the delegate
@@ -72,10 +75,6 @@ class recordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         audioRecorder.meteringEnabled = true
         audioRecorder.prepareToRecord()
         audioRecorder.record()
-        
-        if audioRecorder.recording == true {
-            println("RECORDING NOW! \(audioRecorder.recording)")
-        }
         
     }
     
@@ -126,6 +125,7 @@ class recordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         audioRecorder.stop()
         var audioSession = AVAudioSession.sharedInstance();
         audioSession.setActive(false, error: nil)
+
         
     }
 }

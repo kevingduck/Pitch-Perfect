@@ -27,6 +27,8 @@ class playSoundsViewController: UIViewController {
         //Create AVAudioEngine object and prepare to set it up with the audio file to be read
         audioEngine = AVAudioEngine()
         audioFile = AVAudioFile(forReading: receivedAudio.filePathUrl, error: nil)
+        
+         
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -119,6 +121,8 @@ class playSoundsViewController: UIViewController {
     //Stop audio playback
     @IBAction func stopPlayback(sender: AnyObject) {
         audioPlayer.stop()
+        audioEngine.stop()
+        audioEngine.reset()
     }
     
     //Audio plays back with decreased pitch
